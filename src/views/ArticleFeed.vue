@@ -1,4 +1,4 @@
-<template>
+A<template>
   <div class="py-8 max-w-2xl mx-auto">
     <article-preview
       v-for="article in articles"
@@ -12,13 +12,16 @@
 import Vue from 'vue';
 import fetchData from '@/functions/fetch-data';
 import ArticlePreview from '@/components/ArticlePreview.vue';
+import IArticlePreview from '../models/article-preview';
 
 export default Vue.extend({
-  name: 'Feed',
+  name: 'ArticleFeed',
   components: {
     ArticlePreview,
   },
-  data() {
+  data(): {
+    articles: IArticlePreview[],
+    } {
     return {
       articles: [],
     };
