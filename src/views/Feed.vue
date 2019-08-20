@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-8 max-w-2xl mx-auto">
+  <div class="py-8 max-w-2xl mx-auto">
     <article-preview
       v-for="article in articles"
       :key="article.url"
