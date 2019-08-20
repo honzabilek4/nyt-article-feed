@@ -5,7 +5,7 @@
       :key="article.url"
       class="article-preview mb-6"
     >
-      <h2 class="font-serif font-bold text-3xl">
+      <h2 class="font-serif font-normal leading-tight mb-2 text-2xl">
         {{ article.title }}
       </h2>
       <div>
