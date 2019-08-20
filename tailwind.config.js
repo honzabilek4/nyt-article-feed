@@ -1,6 +1,11 @@
 module.exports = {
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        serif: ['Playfair Display', 'serif'],
+        sans: ['Raleway', 'sans-serif'],
+      },
+    },
   },
   variants: {},
   plugins: [],
