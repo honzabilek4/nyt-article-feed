@@ -1,25 +1,23 @@
 <template>
   <div class="mt-8 max-w-2xl mx-auto">
-    <div
+    <article-preview
       v-for="article in articles"
       :key="article.url"
+      :article="article"
       class="article-preview mb-6"
-    >
-      <h2 class="font-serif font-normal leading-tight mb-2 text-2xl">
-        {{ article.title }}
-      </h2>
-      <div>
-        {{ article.abstract }}
-      </div>
-    </div>
+    />
   </div>
 </template>
 <script lang="ts">
 import Vue from 'vue';
 import fetchData from '@/functions/fetch-data';
+import ArticlePreview from '@/components/ArticlePreview.vue';
 
 export default Vue.extend({
   name: 'Feed',
+  components: {
+    ArticlePreview,
+  },
   data() {
     return {
       articles: [],
