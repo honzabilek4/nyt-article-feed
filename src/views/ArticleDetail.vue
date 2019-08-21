@@ -35,7 +35,6 @@
 import Vue from 'vue';
 import { mapState } from 'vuex';
 import fetchData from '@/functions/fetch-data';
-import IArticlePreview from '@/models/article-preview';
 
 export default Vue.extend({
   name: 'ArticleDetail',
