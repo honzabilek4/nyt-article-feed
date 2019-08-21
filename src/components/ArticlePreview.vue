@@ -4,7 +4,7 @@
       <h2 class="font-serif font-normal leading-tight mb-2 text-2xl">
         {{ article.title }}
       </h2>
-      <div>
+      <div class="article-abstract">
         {{ article.abstract }}
       </div>
     </router-link>
@@ -16,6 +16,7 @@ import Vue from 'vue';
 import IArticlePreview from '@/models/article-preview';
 
 export default Vue.extend({
+  name: 'ArticlePreview',
   props: {
     article: {
       type: Object as () => IArticlePreview,
