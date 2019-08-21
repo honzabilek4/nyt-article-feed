@@ -4,4 +4,6 @@ export default interface IArticlePreview {
   slug_name: string;
   title: string;
   url: string;
+  byline: string;
+  multimedia: Array<any>;
 }

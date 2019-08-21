@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <h2 class="font-serif font-normal leading-tight mb-2 text-2xl">
-      {{ article.title }}
-    </h2>
-    <div>
-      {{ article.abstract }}
-    </div>
+  <div class="article-preview">
+    <router-link :to="{ name: 'article-detail', query: { url: article.url }}">
+      <h2 class="font-serif font-normal leading-tight mb-2 text-2xl">
+        {{ article.title }}
+      </h2>
+      <div>
+        {{ article.abstract }}
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -22,3 +24,8 @@ export default Vue.extend({
   },
 });
 </script>
+<style lang="postcss" scoped>
+  .article-preview:hover h2{
+    @apply underline;
+  }
+</style>
