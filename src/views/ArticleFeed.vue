@@ -23,13 +23,13 @@ export default Vue.extend({
     ...mapState({ articles: 'articleFeed' }),
   },
   async created() {
-    // Fetch article feed only on page refresh, to prevent reaching the API rate limit
+    // Fetch article feed only on page refresh to limit API requests
     if (this.shouldFetch()) {
       await this.$store.dispatch('fetchArticleFeed');
     }
   },
   methods: {
-    shouldFetch():boolean {
+    shouldFetch(): boolean {
       return this.articles.length === 0;
     },
   },
