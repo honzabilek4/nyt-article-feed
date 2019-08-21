@@ -1,4 +1,4 @@
-A<template>
+<template>
   <div class="py-8 max-w-2xl mx-auto">
     <article-preview
       v-for="article in articles"
@@ -10,25 +10,28 @@ A<template>
 </template>
 <script lang="ts">
 import Vue from 'vue';
+import { mapState } from 'vuex';
 import fetchData from '@/functions/fetch-data';
 import ArticlePreview from '@/components/ArticlePreview.vue';
-import IArticlePreview from '../models/article-preview';
 
 export default Vue.extend({
   name: 'ArticleFeed',
   components: {
     ArticlePreview,
   },
-  data(): {
-    articles: IArticlePreview[],
-    } {
-    return {
-      articles: [],
-    };
+  computed: {
+    ...mapState({ articles: 'articleFeed' }),
   },
   async created() {
-    const data = await fetchData('/content/all/all');
-    this.articles = data.results;
+    // Fetch article feed only on page refresh, to prevent reaching the API rate limit
+    if (this.shouldFetch()) {
+      await this.$store.dispatch('fetchArticleFeed');
+    }
+  },
+  methods: {
+    shouldFetch():boolean {
+      return this.articles.length === 0;
+    },
   },
 });
 </script>

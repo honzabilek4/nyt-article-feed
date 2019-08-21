@@ -1,8 +1,12 @@
 <template>
   <v-wait
-    for="Fetching article"
+    :for="FETCH_NAME"
     class="py-8 max-w-2xl mx-auto"
   >
+    <template slot="waiting">
+      <!-- Some content placeholder can be added here -->
+      Loading...
+    </template>
     <h1 class="text-5xl font-serif font-normal leading-tight mb-2">
       {{ article.title }}
     </h1>
@@ -15,7 +19,7 @@
     <div class="mb-4">
       <img
         class="w-full h-auto"
-        :src="article.multimedia[3].url"
+        :src="article.multimedia[article.multimedia.length - 1].url"
       >
     </div>
     <div class="text-center">
@@ -29,23 +33,26 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
+import { mapState } from 'vuex';
 import fetchData from '@/functions/fetch-data';
 import IArticlePreview from '@/models/article-preview';
 
 export default Vue.extend({
   name: 'ArticleDetail',
   data(): {
-    article: IArticlePreview,
+    FETCH_NAME: string,
     } {
     return {
-      article: {} as IArticlePreview,
+      FETCH_NAME: 'Fetching article',
     };
   },
+  computed: {
+    ...mapState({ article: 'articleDetail' }),
+  },
   async created() {
-    this.$wait.start('Fetching article');
-    const data = await fetchData('/content.json', { params: { url: this.$route.query.url } });
-    [this.article] = data.results;
-    this.$wait.end('Fetching article');
+    this.$wait.start(this.FETCH_NAME);
+    await this.$store.dispatch('fetchArticleDetail', this.$route.query.url);
+    this.$wait.end(this.FETCH_NAME);
   },
 });
 </script>
